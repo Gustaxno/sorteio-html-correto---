@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Sorteio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center><h1>Sorteio</h1></center>
+    <input type="text" placeholder="digite seu nome" class="nome"  id="nome" required onkeyup="entrar(event)"><br><br>
+    <div><button onclick="salvar()">Salvar</button> 
+        <button onclick="sortear()">Sortear</button></div>
+    <div class="tags">
+
+    </div>
+    <div><p id="resultado"></p></div>
+    <script>
+        const nomes = [];
+
+        function salvar() {
+            const nomeInput = document.querySelector(".nome");
+            const nome = nomeInput.value;
+            const tags = document.querySelector(".tags");
+
+            nomes.push(nome);
+            nomeInput.value = '';
+
+            tags.innerHTML = nomes.join("<br>");
+        }
+
+        function sortear() {
+            //  var sorte = document.getElementById("sorte")
+            //  var num = Math.round(Math.random () * nomes.length)
+            //  sorte.innerHTML = nomes[num]
+            if (nomes.length === 0) {
+                alert("Adicione nomes antes de realizar o sorteio.");
+                return;
+            }
+
+            const resultado = document.querySelector("#resultado");
+            const indiceSorteado = Math.floor(Math.random() * nomes.length);
+            const nomeSorteado = nomes[indiceSorteado];
+
+            resultado.textContent = `O nome sorteado é: ${nomeSorteado}`;
+        }
+
+        function entrar(event) {
+            if (event.key === 'Enter') {    
+                salvar();
+            }
+        }
+    </script>
+</body>
+</html>
